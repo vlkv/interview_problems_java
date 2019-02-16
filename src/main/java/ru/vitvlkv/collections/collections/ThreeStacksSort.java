@@ -7,54 +7,75 @@ public class ThreeStacksSort {
 
     public static void sortStack(Deque<Integer> stack) {
         State state = new State();
-
+        state.completeGroupsCount = stack.size();
         do {
-            state.groupsCount = 0;
             splitGroups(state, stack);
             mergeGroups(state, stack);
-            state.groupSize *= 2;
-        } while (state.groupsCount > 1);
+            state.completeGroupSize *= 2;
+        } while (state.completeGroupsCount > 1 || state.totalRemindersCount() > 0);
     }
 
     private static class State {
-        public int groupSize = 1;
-        public int groupsCount;
-        public int[] restCounts = new int[2];
+        public int completeGroupSize = 1;
+        public int completeGroupsCount;
+        public int[] remainderGroupSizes = new int[2];
         public Deque<Integer>[] stacks = new Deque[] {new ArrayDeque<>(), new ArrayDeque<>()};
+
+        public int totalRemindersCount() {
+            return remainderGroupSizes[0] + remainderGroupSizes[1];
+        }
     }
 
-    private static void splitGroups(State state, Deque<Integer> stack) {
+    private static void splitGroups(State st, Deque<Integer> stack) {
+
+        st.remainderGroupSizes[0] = 0;
+        st.remainderGroupSizes[1] = 0;
+
+        // get number of complete groups. Poll them and split into two stacks
+        // poll the remainder group
+        st.completeGroupsCount = (st.completeGroupsCount / 2) * 2;
+
         int dst = 0;
-        while (!stack.isEmpty()) {
-            int count = 1;
-            while (!stack.isEmpty() && count <= state.groupSize) {
-                Integer i = stack.pollLast();
-                state.stacks[dst % 2].addLast(i);
-                count++;
-            }
+        for (int i = 0; i < st.completeGroupsCount; ++i) {
+            pollOneGroup(stack, st.stacks[dst % 2], st.completeGroupSize);
+            dst++;
+        }
 
-            if (count < state.groupSize) {
-                // it's a rest elems
-                state.restCounts[dst % 2] = count;
-            } else {
-                // It's a complete group
-                state.groupsCount++;
+        for (int i = 0; i < 2; ++i) {
+            int count = pollOneGroup(stack, st.stacks[dst % 2], st.completeGroupSize);
+            if (count == 0) {
+                break;
             }
+            st.remainderGroupSizes[dst % 2] = count;
 
-            //switch the destinations
             dst++;
         }
     }
 
-    private static void mergeGroups(State state, Deque<Integer> stack) {
-        state.groupsCount = 0;
-        while (!state.stacks[0].isEmpty() && !state.stacks[1].isEmpty()) {
-            int leftCount = state.restCounts[0] > 0 ? state.restCounts[0] : state.groupSize;
-            state.restCounts[0] = 0;
-            int rightCount = state.restCounts[1] > 0 ? state.restCounts[1] : state.groupSize;
-            state.restCounts[1] = 0;
+    private static int pollOneGroup(Deque<Integer> stack, Deque<Integer> stackTo, int groupSize) {
+        int count = 0;
+        while (!stack.isEmpty() && count < groupSize) {
+            Integer i = stack.pollLast();
+            stackTo.addLast(i);
+            count++;
+        }
+        return count;
+    }
 
-            state.groupsCount++;
+    private static void mergeGroups(State state, Deque<Integer> stack) {
+
+        // First merge the remainder groups (if there are two).
+        // If there is only one remainder group, simply move it to the original stack without merge
+
+        boolean isFirst = true;
+        state.completeGroupsCount = 0;
+        while (!state.stacks[0].isEmpty() || !state.stacks[1].isEmpty()) {
+            int leftCount = isFirst ? state.remainderGroupSizes[0] : state.completeGroupSize;
+            int rightCount = isFirst ? state.remainderGroupSizes[1] : state.completeGroupSize;
+
+            state.completeGroupsCount += isFirst ? 0 : 1; // First group is not a complete group
+            isFirst = false;
+
             while (leftCount > 0 || rightCount > 0) {
                 Integer left = leftCount > 0 ? state.stacks[0].peekLast() : null;
                 Integer right = rightCount > 0 ? state.stacks[1].peekLast() : null;
