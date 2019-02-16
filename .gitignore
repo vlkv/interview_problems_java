@@ -1,4 +1,5 @@
 /out/
 /.gradle/
 /gradle/
+/build/
 /.idea/workspace.xml
