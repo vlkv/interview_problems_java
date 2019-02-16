@@ -1,4 +1,4 @@
-package ru.vitvlkv.collections.collections;
+package ru.vitvlkv.collections;
 
 import java.util.List;
 

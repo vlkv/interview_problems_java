@@ -2,7 +2,6 @@ package ru.vitvlkv.collections;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.vitvlkv.collections.collections.MajorityElement;
 
 import java.util.Arrays;
 

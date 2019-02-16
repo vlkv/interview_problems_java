@@ -2,7 +2,6 @@ package ru.vitvlkv.collections;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.vitvlkv.collections.collections.ThreeStacksSort;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
