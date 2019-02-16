@@ -2,7 +2,8 @@ package ru.vitvlkv.collections;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-
+/* You are given three stacks. One stack is filled with random numbers. Sort the numbers using the three stacks.
+* */
 public class ThreeStacksSort {
 
     public static void sortStack(Deque<Integer> stack) {
@@ -30,12 +31,11 @@ public class ThreeStacksSort {
 
 
         private void splitGroups(Deque<Integer> stack) {
-
             remainderGroupSizes[0] = 0;
             remainderGroupSizes[1] = 0;
 
-            // get number of complete groups. Poll them and split into two stacks
-            // poll the remainder group
+            // Complete groups are of the same size. We should keep an even count of complete groups.
+            // Because we're going to merge them. All the other elements form the reminder groups.
             completeGroupsCount = (completeGroupsCount / 2) * 2;
 
             int dst = 0;
@@ -68,7 +68,6 @@ public class ThreeStacksSort {
         private void mergeGroups(Deque<Integer> stack) {
             // First merge the remainder groups (if there are two).
             // If there is only one remainder group, simply move it to the original stack without merge
-
             boolean isFirst = true;
             completeGroupsCount = 0;
             while (!stacks[0].isEmpty() || !stacks[1].isEmpty()) {
