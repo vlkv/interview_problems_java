@@ -7,6 +7,7 @@ public class GoldbachsConjecture {
     public static ArrayList<Integer> primesum(int n) {
         ArrayList<Integer> result = new ArrayList<>();
 
+        // NOTE: We could use SortedSet<Integer> for primes...
         int[] primes = generatePrimes(n + 1);
         for (int i = 0; i < primes.length; ++i) {
             int p = primes[i];
