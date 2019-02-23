@@ -10,4 +10,6 @@ public class FindMaxNumberOfTeamsTests {
         int teamsCount = FindMaxNumberOfTeams.run(new int[] {2, 5, 4, 3, 1}, 3);
         Assert.assertEquals(5, teamsCount);
     }
+
+
 }
