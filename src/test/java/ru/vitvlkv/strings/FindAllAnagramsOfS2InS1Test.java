@@ -13,15 +13,13 @@ public class FindAllAnagramsOfS2InS1Test {
         String s2="ABC";
         List<Integer> result = FindAllAnagramsOfS2InS1.solve(s1, s2);
         Assert.assertArrayEquals(new Integer[]{3, 13}, result.toArray());
-
     }
 
     @Test
     public void test2() {
-        String s1 = "DKFBABCFGACDKLBCADL";
+        String s1 = "DKFACBFGACDKLBCABDL";
         String s2="ABCB";
         List<Integer> result = FindAllAnagramsOfS2InS1.solve(s1, s2);
-        Assert.assertArrayEquals(new Integer[]{3}, result.toArray());
-
+        Assert.assertArrayEquals(new Integer[]{13}, result.toArray());
     }
 }
