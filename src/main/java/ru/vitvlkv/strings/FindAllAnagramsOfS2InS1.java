@@ -7,7 +7,7 @@ import java.util.Map;
 
 /* 438. Find All Anagrams in a String
 * https://leetcode.com/problems/find-all-anagrams-in-a-string/
-* 
+*
 * For s1 = "DKFACBFGACDKLBCABDL" and s2="ABC"
 *               +++  ++-  +++
 *                          +++
