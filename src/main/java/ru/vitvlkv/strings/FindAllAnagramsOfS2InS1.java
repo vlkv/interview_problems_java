@@ -9,8 +9,8 @@ import java.util.Map;
 * https://leetcode.com/problems/find-all-anagrams-in-a-string/
 *
 * For s1 = "DKFACBFGACDKLBCABDL" and s2="ABC"
-*               +++  ++-  +++
-*                          +++
+*              +++  ++-  +++
+*                         +++
 * Result of algorithm should be: [3, 13, 14].
 * The idea of optimal solution is to have a moving window of size s2.length()
 * Increment counter for every char that is added to the window and
