@@ -1,3 +1,5 @@
+package ru.vitvlkv.matrix;
+
 /* Program to print last element of matrix by traversing a matrix by anticlockwise starting from cell(0,0) and skiping alternate.
 Ex:
 Input:
@@ -31,8 +33,8 @@ public class TraverseMatrixCounterClockwise {
     /** @return last elem of the traversal */
     public static int traverseToLastElem(int[][] matrix) {
         assertMatrixIsSquare(matrix);
-        int rows = matrix.length();
-        int cols = matrix[0].length();
+        int rows = matrix.length;
+        int cols = matrix[0].length;
         State state = new State(rows, cols);
         while (true) {
             if (state.isAbleToMove()) {
