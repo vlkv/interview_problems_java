@@ -1,45 +1,52 @@
 package ru.vitvlkv.collections;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class RoundRobinCompositeIterator<E> implements Iterator<E> {
 
-    private Iterator<E>[] iterators;
-    private int current = 0;
+    private List<Iterator<E>> iterators;
+    private Iterator<Iterator<E>> i;
+    private Iterator<E> iterator;
 
     public RoundRobinCompositeIterator(Iterator<E> ...iterators) {
         if (iterators.length == 0) {
             throw new IllegalArgumentException("At least one iterator should be given");
         }
-        this.iterators = iterators;
+        this.iterators = new LinkedList<>();
+        Arrays.stream(iterators)
+                .filter(it -> it.hasNext())
+                .forEach(it -> this.iterators.add(it));
+        incCurrent();
         skipUntilHasNext();
     }
 
     @Override
     public boolean hasNext() {
-        return iterators[current].hasNext();
+        return !iterators.isEmpty() && iterator.hasNext();
     }
 
     @Override
     public E next() {
-        E result = iterators[current].next();
+        if (iterators.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        E result = iterator.next();
         incCurrent();
         skipUntilHasNext();
         return result;
     }
 
-    /** @returns success or not */
-    private boolean skipUntilHasNext() {
-        int count = 0;
-        while (!iterators[current].hasNext() && count < iterators.length) {
+    private void skipUntilHasNext() {
+        while (!iterators.isEmpty() && !iterator.hasNext()) {
+            i.remove();
             incCurrent();
-            count++;
         }
-        return count < iterators.length;
     }
 
     private void incCurrent() {
-        current = ++current % iterators.length;
+        if (i == null || !i.hasNext()) {
+            i = iterators.iterator();
+        }
+        iterator = i.hasNext() ? i.next() : null;
     }
-
 }
