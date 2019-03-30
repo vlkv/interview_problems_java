@@ -17,6 +17,7 @@ public class IsOddNumberOfBinaryTreeNodes {
             value = v;
         }
 
+        // TODO: we may implement caching of isOdd result, making it "dirty" after each add/remove node
         public boolean isOdd() {
             int lc = left == null ? 0 : left.isOdd() ? 1 : 0;
             int rc = right == null ? 0 : right.isOdd() ? 1 : 0;
@@ -32,27 +33,23 @@ public class IsOddNumberOfBinaryTreeNodes {
                 root = new Node<>(v);
                 return;
             }
-            Node<T> r = findSubRootFor(root, v);
-            Comparable<? super T> cmpV = (Comparable<? super T>)v;
-            if (cmpV.compareTo(r.value) < 0) {
-                r.left = new Node(v);
-            } else {
-                r.right = new Node(v);
-            }
+            addImpl(root, v);
         }
 
-        public Node<T> findSubRootFor(Node<T> r, T v) {
+        private void addImpl(Node<T> r, T v) {
             Comparable<? super T> cmpV = (Comparable<? super T>)v;
             if (cmpV.compareTo(r.value) < 0) {
                 if (r.left == null) {
-                    return r;
+                    r.left = new Node(v);
+                    return;
                 }
-                return findSubRootFor(r.left, v);
+                addImpl(r.left, v);
             } else {
                 if (r.right == null) {
-                    return r;
+                    r.right = new Node(v);
+                    return;
                 }
-                return findSubRootFor(r.right, v);
+                addImpl(r.right, v);
             }
         }
     }
