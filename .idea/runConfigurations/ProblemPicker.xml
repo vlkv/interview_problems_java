@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ProblemPicker" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="ru.vitvlkv.ProblemPicker" />
+    <module name="group_id.interview_problems_java.main" />
+    <option name="PROGRAM_PARAMETERS" value="cracking_the_coding_interview.json" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="ru.vitvlkv.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

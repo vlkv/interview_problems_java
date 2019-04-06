@@ -1,0 +1,29 @@
+{
+  "title": "Cracking the Coding Interview, 6th Edition",
+  "chapters": [
+    {
+      "title": "Arrays and Strings",
+      "questionsCount": 9
+    },
+    {
+      "title": "Linked Lists",
+      "questionsCount": 8
+    },
+    {
+      "title": "Stacks and Queues",
+      "questionsCount": 6
+    },
+    {
+      "title": "Trees and Graphs",
+      "questionsCount": 12
+    },
+    {
+      "title": "Bit Manipulation",
+      "questionsCount": 8
+    },
+    {
+      "title": "Math and Logic Puzzles",
+      "questionsCount": 10
+    }
+  ]
+}
