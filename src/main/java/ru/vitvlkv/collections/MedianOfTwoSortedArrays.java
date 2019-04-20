@@ -66,26 +66,30 @@ public class MedianOfTwoSortedArrays {
         while (true) {
             j = (jMin + jMax) / 2;
             i = calcMatchedIndex(j, n, m);
-            if (i >= 0 && (i >= n || !(B[j-1] <= A[i]))) {
-                // move j to the left
-                jMax = j + 1;
-            } else if (i < 0 && (i < n || !(A[i-1] <= B[j]))) {
-                // move j to the right
-                jMin = j;
-            } else {
-                return calcResult(A, B, i, j);
+            if (i >= 0 && i < n) {
+                if (B[j - 1] > A[i]) {
+                    // move j to the left
+                    jMax = j + 1;
+                } else if (A[i - 1] > B[j]) {
+                    // move j to the right
+                    jMin = j;
+                } else {
+                    return calcResult(A, B, i, j);
+                }
             }
 
             i = (iMin + iMax) / 2;
             j = calcMatchedIndex(i, n, m);
-            if (j >= 0 && (j >= m || !(B[j-1] <= A[i]))) {
-                // move i to the right
-                iMin = i;
-            } else if (j < 0 && (j < m || !(A[i-1] <= B[j]))) {
-                // move i to the left
-                iMax = i + 1;
-            } else {
-                return calcResult(A, B, i, j);
+            if (j >= 0 && j < m) {
+                if (B[j - 1] > A[i]) {
+                    // move i to the right
+                    iMin = i;
+                } else if (A[i - 1] > B[j]) {
+                    // move i to the left
+                    iMax = i + 1;
+                } else {
+                    return calcResult(A, B, i, j);
+                }
             }
         }
     }
@@ -97,7 +101,7 @@ public class MedianOfTwoSortedArrays {
     private static double calcResult(int[] A, int[] B, int i, int j) {
         int n = A.length;
         int m = B.length;
-        int maxOfLeft = i - 1 < 0 ? B[j-1] : A[i-1] > B[j-1] ? A[i-1] : B[j-1];
+        int maxOfLeft = A[i-1] > B[j-1] ? A[i-1] : B[j-1];
         int minOfRight = A[i] < B[j] ? A[i] : B[j];
 
         if (i + j > n - i + m - j) {
