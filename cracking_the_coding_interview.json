@@ -24,6 +24,51 @@
     {
       "title": "Math and Logic Puzzles",
       "questionsCount": 10
+    },
+    {
+      "title": "Object-Oriented Design",
+      "questionsCount": 12
+    },
+    {
+      "title": "Recursion and Dynamic Programming",
+      "questionsCount": 14
+    },
+    {
+      "title": "System Design and Scalablility",
+      "questionsCount": 8
+    },
+    {
+      "title": "Sorting and Searching",
+      "questionsCount": 11
+    },
+    {
+      "title": "Testing",
+      "questionsCount": 6
+    },
+    // TODO
+    {
+      "title": "Math and Logic Puzzles",
+      "questionsCount": 10
+    },
+    {
+      "title": "Math and Logic Puzzles",
+      "questionsCount": 10
+    },
+    {
+      "title": "Math and Logic Puzzles",
+      "questionsCount": 10
+    },
+    {
+      "title": "Math and Logic Puzzles",
+      "questionsCount": 10
+    },
+    {
+      "title": "Math and Logic Puzzles",
+      "questionsCount": 10
+    },
+    {
+      "title": "Math and Logic Puzzles",
+      "questionsCount": 10
     }
   ]
 }
