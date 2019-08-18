@@ -5,7 +5,7 @@
     <option name="PROGRAM_PARAMETERS" value="cracking_the_coding_interview.json" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="ru.vitvlkv.*" />
+        <option name="PATTERN" value="ru.vitvlkv.arrays.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
